@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CubeZoneController : MonoBehaviour
-{
-
+{ 
     public GameObject CollectableBox;
     public List<GameObject> BoxNodes;
     public List<GameObject> CollectableBoxes;
@@ -18,7 +17,7 @@ public class CubeZoneController : MonoBehaviour
     {
         if (CollectableBoxes.Count < BoxNodes.Count)
         {
-            StartCoroutine(SpawnCollectableBoxes(1f));
+            StartCoroutine(SpawnCollectableBoxes(3f));
         }
 
 
@@ -50,6 +49,7 @@ public class CubeZoneController : MonoBehaviour
             GameObject newCollectable = Instantiate(CollectableBox, SpawnNode.transform);
             CollectableBoxes.Add(newCollectable);
 
+
             Debug.Log("spawncollectableboxes");
 
             yield return new WaitForSeconds(waitTime);
@@ -73,6 +73,9 @@ public class CubeZoneController : MonoBehaviour
         return NodeList[randomNumber];
         
     }
+
+
+   
 
     
 }
