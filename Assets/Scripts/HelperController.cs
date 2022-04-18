@@ -26,24 +26,27 @@ public class HelperController : MonoBehaviour
     void Update()
     {
         
-        if (HelpZone.CollectableBoxes.Count > 0 && HelperBoxInventory.transform.childCount < PickAmount)
+        if (HelpZone.CollectableBoxes.Count > 0)
         {
-            HaveDestination = true;
+            if (HelperBoxInventory.transform.childCount < PickAmount)
+            {
+                HaveDestination = true;
 
-            Destination = HelpZone.CollectableBoxes[0].transform.position;
-            MoveToZone(Destination);
+                Destination = HelpZone.CollectableBoxes[0].transform.position;
+                MoveToZone(Destination);
 
-            Debug.Log(Destination + "+"+HelpZone.CollectableBoxes[0].transform.position);
+                //Debug.Log(Destination + "+" + HelpZone.CollectableBoxes[0].transform.position);
+            }
 
-            if(HelperBoxInventory.transform.childCount >= PickAmount)
+            else
             {
                 HaveDestination = false;
+                Destination = StorageObject.transform.position;
+                MoveToZone(Destination);
             }
         }
-        else if (!HaveDestination)
-        {
-            Destination = StorageObject.transform.position;
-        }
+        
+     
 
 
         
@@ -62,13 +65,11 @@ public class HelperController : MonoBehaviour
 
     private void PickUpBoxes(GameObject CollectBox)
     {
+        HelpZone.CollectableBoxes.RemoveAt(0);
+
         CollectBox.transform.parent = HelperBoxInventory.transform;
         CollectBox.transform.localPosition = Vector3.up * (CollectBox.transform.localScale.y) * (HelperBoxInventory.transform.childCount - 1);
         CollectBox.transform.localRotation = Quaternion.Euler(Vector3.zero);
-
-        
-        HelpZone.CollectableBoxes.RemoveAt(0);
-
 
     }
 

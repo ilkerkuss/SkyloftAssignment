@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -36,13 +37,23 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("++"+other.tag);
+
         if (other.transform.CompareTag("Collectable"))
         {
+
             other.gameObject.transform.parent = BoxInventory.transform;
-            other.gameObject.transform.localPosition = Vector3.up* (other.transform.localScale.y) * (BoxInventory.transform.childCount-1);
+            other.transform.DOLocalJump((Vector3.up * (other.transform.localScale.y) * (BoxInventory.transform.childCount - 1)),2,1,1f);
+            //other.gameObject.transform.localPosition = Vector3.up * (other.transform.localScale.y) * (BoxInventory.transform.childCount - 1);
             other.transform.localRotation = Quaternion.Euler(Vector3.zero);
             PickedBoxesList.Add(other.gameObject);
-            
+           
         }
+
+        else if (other.transform.CompareTag("ZoneOpener"))
+        {
+            Destroy(PickedBoxesList[0]);
+        }
+
     }
 }

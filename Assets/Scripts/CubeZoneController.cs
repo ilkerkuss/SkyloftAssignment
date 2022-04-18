@@ -15,9 +15,11 @@ public class CubeZoneController : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(ActivateRandomNode(BoxNodes));
+
         if (CollectableBoxes.Count < BoxNodes.Count)
         {
-            StartCoroutine(SpawnCollectableBoxes(3f));
+            //StartCoroutine(SpawnCollectableBoxes(3f));
         }
 
 
@@ -26,10 +28,12 @@ public class CubeZoneController : MonoBehaviour
 
     private void Update()
     {
+
+        //StartCoroutine(ActivateRandomNode(BoxNodes));
         if (CollectableBoxes.Count < BoxNodes.Count)
         {
             //StartCoroutine(SpawnCollectableBoxes(3f));
-            Debug.Log("baþladý");
+
         }
         else
         {
@@ -39,6 +43,7 @@ public class CubeZoneController : MonoBehaviour
         
     }
 
+    /*
     private IEnumerator SpawnCollectableBoxes(float waitTime)
     {
         yield return new WaitForSeconds(waitTime);
@@ -54,10 +59,10 @@ public class CubeZoneController : MonoBehaviour
 
             yield return new WaitForSeconds(waitTime);
         }
-       
 
     }
-
+    */
+    /*
     private GameObject GetRandomEmptyNode(List<GameObject> NodeList)
     {
         int randomNumber = Random.Range(0,NodeList.Count);
@@ -72,6 +77,22 @@ public class CubeZoneController : MonoBehaviour
         Debug.Log("getrandomemptynode");
         return NodeList[randomNumber];
         
+    }
+    */
+
+    private IEnumerator ActivateRandomNode(List<GameObject> NodeList)
+    {
+
+        //int randomNumber = Random.Range(0, NodeList.Count);
+
+        foreach (var item in NodeList)
+        {
+            item.SetActive(true);
+            yield return new WaitForSeconds(2f);
+        }
+
+                   
+
     }
 
 

@@ -363,7 +363,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
@@ -375,7 +375,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2525298803227015635}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -419,7 +419,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6671230923605277514
 MonoBehaviour:
@@ -437,6 +437,9 @@ MonoBehaviour:
   HelpZone: {fileID: 0}
   PickAmount: 4
   HelperBoxInventory: {fileID: 3443776177920674817}
+  StorageObject: {fileID: 0}
+  Destination: {x: 0, y: 0, z: 0}
+  HaveDestination: 0
 --- !u!1 &2657692256532501599
 GameObject:
   m_ObjectHideFlags: 0
