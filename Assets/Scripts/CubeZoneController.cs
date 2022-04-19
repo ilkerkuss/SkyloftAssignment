@@ -9,25 +9,36 @@ public class CubeZoneController : MonoBehaviour
     public List<GameObject> CollectableBoxes;
 
     public GameObject CubeGate;
-    public bool IsGateOpen = false;
+    public bool IsCubeZoneActive = false;
+
+    private WaitForSeconds NodeActivationDelay = new WaitForSeconds(1f);
+
     
     //public Transform SpawnCenter;
 
     private void Start()
     {
-        StartCoroutine(ActivateRandomNode(BoxNodes));
-
-        if (CollectableBoxes.Count < BoxNodes.Count)
+        /*
+        if (IsCubeZoneActive)
         {
-            //StartCoroutine(SpawnCollectableBoxes(3f));
+            StartCoroutine(ActivateRandomNode(BoxNodes));
         }
-
+        */
+        
 
         
     }
 
     private void Update()
     {
+        if (IsCubeZoneActive)
+        {
+            StartCoroutine(ActivateRandomNode(BoxNodes));
+            StopCoroutine(ActivateRandomNode(BoxNodes));
+            CubeGate.SetActive(false);
+        }
+
+
 
         //StartCoroutine(ActivateRandomNode(BoxNodes));
         if (CollectableBoxes.Count < BoxNodes.Count)
@@ -39,9 +50,8 @@ public class CubeZoneController : MonoBehaviour
         {
             //StopCoroutine(SpawnCollectableBoxes(.5f));
         }
-        
-        
     }
+
 
     /*
     private IEnumerator SpawnCollectableBoxes(float waitTime)
@@ -82,17 +92,18 @@ public class CubeZoneController : MonoBehaviour
 
     private IEnumerator ActivateRandomNode(List<GameObject> NodeList)
     {
-
         //int randomNumber = Random.Range(0, NodeList.Count);
 
         foreach (var item in NodeList)
         {
             item.SetActive(true);
-            yield return new WaitForSeconds(2f);
+            yield return NodeActivationDelay;
         }
+    }
 
-                   
-
+    private void CallActivateRandomNodeFunc()
+    {
+        StartCoroutine(ActivateRandomNode(BoxNodes));
     }
 
 

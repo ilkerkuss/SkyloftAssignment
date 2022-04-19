@@ -378,7 +378,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.3, y: 1, z: 0.3}
   m_Center: {x: 0, y: 0.51, z: 0}
 --- !u!95 &3443776179217035368
 Animator:
@@ -435,8 +435,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HelperNavMeshAgent: {fileID: 6671230923605277515}
   HelpZone: {fileID: 0}
-  PickAmount: 4
   HelperBoxInventory: {fileID: 3443776177920674817}
+  PickAmount: 4
+  HelperBoxList: []
   StorageObject: {fileID: 0}
   Destination: {x: 0, y: 0, z: 0}
   HaveDestination: 0
