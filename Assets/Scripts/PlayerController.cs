@@ -54,9 +54,9 @@ public class PlayerController : MonoBehaviour
         {
             Box.GetComponentInParent<CubeZoneController>().CollectableBoxes.Remove(Box);
         }
-        else if (Box.GetComponentInParent<StorageController>())
+        else if (Box.GetComponentInParent<StorageModifiedController>())
         {
-            Box.GetComponentInParent<StorageController>().StorageList.Remove(Box);
+            Box.GetComponentInParent<StorageModifiedController>().StorageList.Remove(Box);
         }
        
 
@@ -90,20 +90,43 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("ZoneOpener") && PickedBoxesList.Count > 0 && other.GetComponentInParent<ZoneController>().DependencyZone.IsZoneActive && other.GetComponentInParent<ZoneController>().ZoneOpenAmount!=0)
+        if (other.CompareTag("ZoneOpener") && PickedBoxesList.Count > 0  && other.GetComponentInParent<ZoneController>().ZoneOpenAmount != 0)
         {
-            DecreaseZoneAmount((int)(other.GetComponentInParent<ZoneController>().ZoneSO.ID));
+            if (other.GetComponentInParent<ZoneController>().DependencyZone == null)
+            {
+                DecreaseZoneAmount((int)(other.GetComponentInParent<ZoneController>().ZoneSO.ID));
 
-            var lastBox = PickedBoxesList[PickedBoxesList.Count - 1];
-            lastBox.transform.DOJump(other.transform.position, 2, 1, 1);
-            lastBox.tag = "Untagged";
-            PickedBoxesList.Remove(lastBox);
-            lastBox.transform.parent = null;
-            UpdateBoxText(PickedBoxesList.Count);
+                var lastBox = PickedBoxesList[PickedBoxesList.Count - 1];
+                lastBox.transform.DOJump(other.transform.position, 2, 1, 1);
+                lastBox.tag = "Untagged";
+                PickedBoxesList.Remove(lastBox);
+                lastBox.transform.parent = null;
+                UpdateBoxText(PickedBoxesList.Count);
 
 
 
-            Destroy(lastBox, 1.1f);
+                Destroy(lastBox, 1.1f);
+            }
+            else
+            {
+                if (other.GetComponentInParent<ZoneController>().DependencyZone.IsZoneActive)
+                {
+                    DecreaseZoneAmount((int)(other.GetComponentInParent<ZoneController>().ZoneSO.ID));
+
+                    var lastBox = PickedBoxesList[PickedBoxesList.Count - 1];
+                    lastBox.transform.DOJump(other.transform.position, 2, 1, 1);
+                    lastBox.tag = "Untagged";
+                    PickedBoxesList.Remove(lastBox);
+                    lastBox.transform.parent = null;
+                    UpdateBoxText(PickedBoxesList.Count);
+
+
+
+                    Destroy(lastBox, 1.1f);
+                }
+               
+            }
+            
         }
     }
 

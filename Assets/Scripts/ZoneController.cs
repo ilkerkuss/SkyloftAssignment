@@ -17,17 +17,12 @@ public class ZoneController : MonoBehaviour
     public ZoneController DependencyZone;
     public CubeZoneController DependencyCubeZone;
 
-    public SkinnedMeshRenderer HelperMeshRenderer;
+    public GameObject HelperObject;
 
     private void Start()
     {
         ZoneOpenAmount = ZoneSO.ZoneOpenCost;
         ZoneOpenAmountText.text = ZoneOpenAmount.ToString();
-
-        if (ZoneSO.ID == 0)
-        {
-            IsZoneActive = true;
-        }
 
     }
 
@@ -37,7 +32,11 @@ public class ZoneController : MonoBehaviour
         ZoneGate.SetActive(false);
         IsZoneActive = true;
 
-        //HelperMeshRenderer.enabled = true;
+        if (HelperObject!=null)
+        {
+            HelperObject.SetActive(true);
+        }
+        
 
 
         if (DependencyCubeZone == null)
